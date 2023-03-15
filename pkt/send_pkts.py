@@ -2,7 +2,6 @@
 #!/usr/bin/env python3
 
 import socket
-import sys
 import random
 from time import sleep
 
@@ -69,16 +68,12 @@ def generate_db_pkt(pkt, entityId=0, pick_random_entityId=False):
     except ValueError:
         pass
         
-    pkt = pkt / UDP(dport=4321, sport=1234) / sys.argv[2]
+    pkt = pkt / UDP(dport=4321, sport=1234) / "P4 is cool"
     return pkt
 
 def main():
-
-    if len(sys.argv)<3:
-        print('pass 2 arguments: <destination> "<message>"')
-        exit(1)
     
-    addr = socket.gethostbyname(sys.argv[1])
+    addr = socket.gethostbyname("10.0.2.2")
     iface = get_if()
 
     # Generate the first relation, which will be stored on the switch
@@ -97,7 +92,7 @@ def main():
         raise
 
     for entityId in RANDOM_ENTITYIDS:
-        pkt = Ether(src=get_if_hwaddr(iface), dst="ff:ff:ff:ff:ff:ff") / IP(dst=addr, proto=0xFA) / DBRelation(relationId=1, aggregate=1)
+        pkt = Ether(src=get_if_hwaddr(iface), dst="ff:ff:ff:ff:ff:ff") / IP(dst=addr, proto=0xFA) / DBRelation(relationId=1)
         r_relation = generate_db_pkt(pkt, entityId)
 
         r_relation.show2()

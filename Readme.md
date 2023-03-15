@@ -65,7 +65,7 @@ sudo python3 bfrt_python/sniff_pkts.py
 ```
 * In a new terminal, execute `send_pkts.py` script to send requests
 ```
-sudo python3 bfrt_python/send_pkts.py 10.0.2.2 "P4 is cool"
+sudo python3 bfrt_python/send_pkts.py
 ```
 
 ### Example output
